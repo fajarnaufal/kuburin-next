@@ -6,8 +6,8 @@ import { z } from 'zod';
 import { randomBytes } from 'node:crypto';
 
 const schema = z.object({
-    url: z.string().url('Please enter a valid URL'),
-    custom_alias: z.string().optional().refine(val => !val || /^[a-zA-Z0-9-_]+$/.test(val), 'Alias can only contain letters, numbers, dashes, and underscores'),
+    url: z.string().url('Please enter a valid URL').max(2048, 'URL is too long (max 2048 characters)'),
+    custom_alias: z.string().max(32, 'Alias is too long (max 32 characters)').optional().refine(val => !val || /^[a-zA-Z0-9-_]+$/.test(val), 'Alias can only contain letters, numbers, dashes, and underscores'),
     duration: z.enum(['8h', '24h', '3d', '7d', '30d']),
 });
 
@@ -36,7 +36,7 @@ function calculateExpiry(duration: string): Date {
 
 import { headers } from 'next/headers';
 
-// ... imports
+
 
 export async function buryLink(prevState: any, formData: FormData) {
     const hp = formData.get('hp');
@@ -60,8 +60,8 @@ export async function buryLink(prevState: any, formData: FormData) {
                 where: { ip },
                 data: { count: 1, expiresAt: new Date(now.getTime() + 60 * 60 * 1000) }
             });
-        } else if (limit.count >= 10) { // Limit: 10 per hour
-            return { message: 'Too many links created. Try again later.' };
+        } else if (limit.count >= 10) {
+            return { message: 'Rate limit exceeded. Try again later.' };
         } else {
             await prismaClient.rateLimit.update({
                 where: { ip },
@@ -117,7 +117,7 @@ export async function buryLink(prevState: any, formData: FormData) {
         }
     }
 
-    // Double check shortCode is not null/undefined
+
     if (!shortCode) return { message: 'Failed to generate code' };
 
     try {

@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# kuburin 🪦
 
-## Getting Started
+**R.I.P. Long URLs.**
 
-First, run the development server:
+kuburin is a simple, dark-themed URL shortener. It "buries" your long links and gives them a shorter alias.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Why I made this
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+I use link shorteners all the time and got curious about how they actually work under the hood. So, I decided to build one myself to learn the process—from database design to handling redirects.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Graveyard Theme:** Dark aesthetic with subtle animations.
+- **Custom Aliases:** Create your own custom short links (e.g., `/my-link`).
+- **Expiration:** Links can be set to expire automatically (from 8 hours to 30 days).
+- **Tech:** Built with Next.js 16 (App Router), PostgreSQL, and Tailwind CSS.
 
-## Learn More
+## Running it locally
 
-To learn more about Next.js, take a look at the following resources:
+1.  **Clone the repo**
+    ```bash
+    git clone https://github.com/fajarnaufal/kuburin-next.git
+    cd kuburin-next
+    ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2.  **Install dependencies**
+    ```bash
+    npm install
+    ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3.  **Database Setup**
+    This project uses PostgreSQL.
+    Rename `.env.example` to `.env` and add your database connection string (local PostgreSQL or a cloud provider like Supabase).
+    ```bash
+    cp .env.example .env
+    ```
 
-## Deploy on Vercel
+4.  **Run the development server**
+    ```bash
+    npm run dev
+    ```
+    Open `http://localhost:3000` to start burying links.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Tech Stack
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Framework:** Next.js 16
+- **Database:** PostgreSQL + Prisma ORM
+- **Styling:** Tailwind CSS
+- **Deployment:** Vercel
+
+## Credit
+
+Created by [nphew](https://naufalfajar.com).
+Code is open source, feel free to look around if you're learning too.

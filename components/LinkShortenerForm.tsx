@@ -22,6 +22,7 @@ export default function LinkShortenerForm() {
                         name="url"
                         placeholder="https://example.com/very-long-url..."
                         required
+                        maxLength={2048}
                         className="w-full bg-kubur-gray border border-gray-700 rounded-md px-4 py-3 text-kubur-text focus:ring-1 focus:ring-kubur-accent focus:outline-none placeholder-gray-600"
                     />
                     {state?.errors?.url && <p className="text-kubur-danger text-xs mt-1">{state.errors.url[0]}</p>}
@@ -30,11 +31,12 @@ export default function LinkShortenerForm() {
                 <div>
                     <label className="block text-sm font-medium text-gray-400 mb-2">Custom Alias (Optional)</label>
                     <div className="relative">
-                        <span className="absolute left-4 top-3 text-gray-500">/</span>
+                        <span className="absolute left-4 top-3 text-gray-400">/</span>
                         <input
                             type="text"
                             name="custom_alias"
                             placeholder="your-alias"
+                            maxLength={32}
                             className="w-full bg-kubur-gray border border-gray-700 rounded-md pl-8 pr-4 py-3 text-kubur-text focus:ring-1 focus:ring-kubur-accent focus:outline-none placeholder-gray-600"
                         />
                     </div>
